@@ -12,11 +12,11 @@ interface AuthenticateUseCaseResponse {
 }
 
 export class AuthenticateUseCase {
-  constructor(private userRepository: IUsersRepository) {}
+  constructor(private usersRepository: IUsersRepository) {}
 
 
   async execute({email, password}: AuthenticateUseCaseRequest): Promise<AuthenticateUseCaseResponse> {
-    const user = await this.userRepository.findByEmail(email);
+    const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
       throw new InvalidCredentialsError();

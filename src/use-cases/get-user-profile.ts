@@ -10,12 +10,12 @@ interface GetUserProfileUseCaseResponse {
 }
 
 export class GetUserProfileUseCase {
-  constructor(private userRepository: IUsersRepository) {}
+  constructor(private usersRepository: IUsersRepository) {}
 
   async execute({
     userId,
   }: GetUserProfileUseCaseRequest): Promise<GetUserProfileUseCaseResponse> {
-    const user = await this.userRepository.findById(userId);
+    const user = await this.usersRepository.findById(userId);
 
     if (!user) {
       throw new ResourceNotFoundError();
