@@ -4,6 +4,7 @@ import { IGymsRepository } from '@/repositories/gyms-repository';
 import { getDistanceBetweenCoordinates } from '@/utils/get-distance-between-coordinates';
 import { MaxDistanceError } from './errors/max-distance-error';
 import { MaxNumberOfCheckInsError } from './errors/max-number-of-check-ins-error';
+import { ResourceNotFoundError } from './errors/resource-not-found-error';
 
 interface CheckInUseCaseRequest {
   userId: string;
@@ -33,7 +34,7 @@ export class CheckInUseCase {
     const gym = await this.gymsRepository.findById(gymId);
 
     if (!gym) {
-      throw new Error();
+      throw new ResourceNotFoundError();
     }
 
     // calculate distance beetwen user and gym
