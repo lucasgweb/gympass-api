@@ -9,6 +9,11 @@ export class InMemoryGymsRepository implements IGymsRepository {
     return this.items.find((item) => item.id === id) ?? null;
   }
 
+  async searchMany(query: string, page: number) {
+    return this.items.filter(item => item.title.includes(query))
+      .slice((page - 1) * 20, page * 20);
+  }
+
   async create(data: Prisma.GymCreateInput) {
     const gym: Gym = {
       id: data.id ?? randomUUID(),
@@ -16,7 +21,7 @@ export class InMemoryGymsRepository implements IGymsRepository {
       description: data.description ?? null,
       phone: data.phone ?? null,
       latitude: new Prisma.Decimal(data.latitude.toString()),
-      longitude: new Prisma.Decimal(data.longitude.toString())
+      longitude: new Prisma.Decimal(data.longitude.toString()),
     };
 
     this.items.push(gym);
