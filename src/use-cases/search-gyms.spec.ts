@@ -16,7 +16,7 @@ describe('Search Gyms Use Case', () => {
   afterEach(() => {
     vi.useRealTimers();
   });
-  it.skip('should be able to search for gyms', async () => {
+  it('should be able to search for gyms', async () => {
     await gymsRepository.create({
       title: 'Javascript Gym',
       description: null,
